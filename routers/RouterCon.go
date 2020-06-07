@@ -3,5 +3,9 @@ package routers
 import "github.com/gorilla/mux"
 
 func RouterCon() *mux.Router  {
-	return mux.NewRouter()
+	router := mux.NewRouter()
+
+	routerProfile(router)
+
+	return router
 }
