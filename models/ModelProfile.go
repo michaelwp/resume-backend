@@ -2,7 +2,6 @@ package models
 
 import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"time"
 )
 
 type Biodata struct {
@@ -10,12 +9,18 @@ type Biodata struct {
 	FirstName 	string `json:"first_name"`
 	LastName 	string `json:"last_name"`
 	BirthPlace 	string `json:"birth_place"`
-	BirthDate 	time.Time `json:"birth_date"`
+	BirthDate 	string `json:"birth_date"`
 	Address 	string `json:"address"`
 	City 		string `json:"city"`
 	Province 	string `json:"province"`
 	State 		string `json:"state"`
 	ZipCode 	string `json:"zip_code"`
+}
+
+type AboutMe struct {
+	Id 			primitive.ObjectID `bson:"_id" json:"id"`
+	AboutMe		string `json:"about_me"`
+	BiodataId 	string `json:"biodata_id"`
 }
 
 type Contact struct {
@@ -32,10 +37,18 @@ type SocialMedia struct {
 	BiodataId 	string `json:"biodata_id"`
 }
 
+type ProfilePicture struct {
+	Id			primitive.ObjectID `bson:"_id" json:"id"`
+	ImgUri		string `json:"img_uri"`
+	BiodataId	string `json:"biodata_id"`
+}
+
 type BiodataFull struct {
 	Biodata 	Biodata
+	AboutMe		AboutMe
 	Contact 	Contact
-	SocialMedia SocialMedia
+	SocialMedia []SocialMedia
+	ProfilePicture ProfilePicture
 }
 
 type ResponseBiodata struct {
