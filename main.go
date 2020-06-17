@@ -8,9 +8,8 @@ import (
 )
 
 func main()  {
-	port := ":8080"
-	router := routers.RouterCon()
+	router, resp, port := routers.RouterCon()
 
-	fmt.Println("Server running and listening on port", port)
+	fmt.Println(resp, port)
 	log.Fatal(http.ListenAndServe(port, router))
 }

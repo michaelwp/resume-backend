@@ -5,7 +5,9 @@ import (
 	"github.com/michaelwp/resume-backend/routers/v1"
 )
 
-func RouterCon() *mux.Router  {
+func RouterCon() (*mux.Router, string, string)  {
+	port := ":8080"
+	resp := "Server running and listening on port"
 	router := mux.NewRouter()
 
 	api := router.PathPrefix("/api").Subrouter()
@@ -14,5 +16,5 @@ func RouterCon() *mux.Router  {
 	ver1 := api.PathPrefix("/v1").Subrouter()
 	v1.RouterProfile(ver1)
 
-	return router
+	return router, resp, port
 }
