@@ -6,6 +6,7 @@ import (
 )
 
 func TestRouterCon(t *testing.T)  {
+	//fmt.Println("test router connection : ")
 	_, resp, port := routers.RouterCon()
 
 	serverResp := resp + " " + port
