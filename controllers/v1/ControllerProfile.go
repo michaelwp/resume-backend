@@ -162,7 +162,7 @@ func findProfilePicture(id string) models.ProfilePicture {
 	}
 	=====================================================
 */
-func PostBiodata(w http.ResponseWriter, r *http.Request)  {
+func PostProfile(w http.ResponseWriter, r *http.Request)  {
 	var b models.Biodata
 	var f []models.BiodataFull
 
@@ -206,7 +206,7 @@ func PostBiodata(w http.ResponseWriter, r *http.Request)  {
 	}
 	=====================================================
 */
-func PostAboutMe(w http.ResponseWriter, r *http.Request)  {
+func PostAbout(w http.ResponseWriter, r *http.Request)  {
 	var a models.AboutMe
 	var f []models.BiodataFull
 
@@ -281,7 +281,7 @@ func PostContact(w http.ResponseWriter, r *http.Request)  {
 	}
 	=====================================================
 */
-func PostSocialMedia(w http.ResponseWriter, r *http.Request)  {
+func PostSocial(w http.ResponseWriter, r *http.Request)  {
 	var s models.SocialMedia
 	var f []models.BiodataFull
 
@@ -318,7 +318,7 @@ func PostSocialMedia(w http.ResponseWriter, r *http.Request)  {
 	}
 	=====================================================
 */
-func PostProfilePicture(w http.ResponseWriter, r *http.Request)  {
+func PostPicture(w http.ResponseWriter, r *http.Request)  {
 	var p models.ProfilePicture
 	var f []models.BiodataFull
 
