@@ -10,7 +10,7 @@ import (
 
 func main()  {
 	port := helpers.LoadEnv("HOST_PORT")
-	host := helpers.LoadEnv("HOST_DEV")
+	host := helpers.LoadEnv("HOST")
 
 	h := strings.Join([]string{host, port},"")
 

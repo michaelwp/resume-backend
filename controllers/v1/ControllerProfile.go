@@ -13,10 +13,12 @@ import (
 	"strings"
 )
 
+var dbCon, _ = db.DbCon("db_resume")
+
 /*
 	=====================================================
 	Profile [GET]
-	http://localhost:8080/profile
+	http://localhost:8080/api/v1/profiles
 	=====================================================
 */
 func GetProfile(w http.ResponseWriter, r *http.Request)  {
@@ -24,7 +26,7 @@ func GetProfile(w http.ResponseWriter, r *http.Request)  {
 	var biodataFull models.BiodataFull
 	var biodataFullRes []models.BiodataFull
 
-	cur, err := db.DbCon().Collection("tbl_biodata").Find(context.TODO(), bson.D{})
+	cur, err := dbCon.Collection("tbl_biodata").Find(context.TODO(), bson.D{})
 	if err != nil {log.Fatal(err)}
 
 	for cur.Next(context.TODO()) {
@@ -66,7 +68,7 @@ func findBiodata(id string) models.BiodataFull {
 	if err != nil {log.Fatal(err)}
 
 	filter := bson.M{"_id": oid}
-	err = db.DbCon().Collection("tbl_biodata").FindOne(context.TODO(), filter).Decode(&b)
+	err = dbCon.Collection("tbl_biodata").FindOne(context.TODO(), filter).Decode(&b)
 	if err != nil {log.Println(err)}
 
 	f.AboutMe = findAboutMe(id)
@@ -87,7 +89,7 @@ func findAboutMe(id string) models.AboutMe{
 	var a models.AboutMe
 	filter := bson.M{"biodataid": id}
 
-	err := db.DbCon().Collection("tbl_about_me").FindOne(context.TODO(), filter).Decode(&a)
+	err := dbCon.Collection("tbl_about_me").FindOne(context.TODO(), filter).Decode(&a)
 	if err != nil {log.Println(err)}
 
 	return a
@@ -102,7 +104,7 @@ func findContact(id string) models.Contact{
 	var c models.Contact
 	filter := bson.M{"biodataid": id}
 
-	err := db.DbCon().Collection("tbl_contact").FindOne(context.TODO(), filter).Decode(&c)
+	err := dbCon.Collection("tbl_contact").FindOne(context.TODO(), filter).Decode(&c)
 	if err != nil {log.Println(err)}
 
 	return c
@@ -117,7 +119,7 @@ func findSocialMedia(id string) []models.SocialMedia{
 	var socialMedia []models.SocialMedia
 	filter := bson.M{"biodataid": id}
 
-	cur, err := db.DbCon().Collection("tbl_social_media").Find(context.TODO(), filter)
+	cur, err := dbCon.Collection("tbl_social_media").Find(context.TODO(), filter)
 	if err != nil {log.Println(err)}
 
 	for cur.Next(context.TODO()) {
@@ -144,7 +146,7 @@ func findProfilePicture(id string) models.ProfilePicture {
 	var pp models.ProfilePicture
 	filter := bson.M{"biodataid": id}
 
-	err := db.DbCon().Collection("tbl_profile_picture").FindOne(context.TODO(), filter).Decode(&pp)
+	err := dbCon.Collection("tbl_profile_picture").FindOne(context.TODO(), filter).Decode(&pp)
 	if err != nil {log.Println(err)}
 
 	return pp
@@ -153,7 +155,7 @@ func findProfilePicture(id string) models.ProfilePicture {
 /*
 	=====================================================
 	Home [POST]
-	http://localhost:8080/profile
+	http://localhost:8080/api/v1/profiles
 	request Body = {
 		"first_name" : "John"
 		"last_name" : "Doe"
@@ -184,7 +186,7 @@ func PostProfile(w http.ResponseWriter, r *http.Request)  {
 		"zipcode": strings.ToLower(b.ZipCode),
 	}
 
-	res, err := db.DbCon().Collection("tbl_biodata").InsertOne(context.TODO(), dataInput)
+	res, err := dbCon.Collection("tbl_biodata").InsertOne(context.TODO(), dataInput)
 	if err != nil {
 		responseProfile(w, 0, err.Error(), f, http.StatusBadRequest)
 		return
@@ -221,7 +223,7 @@ func PostAbout(w http.ResponseWriter, r *http.Request)  {
 		"biodataid": a.BiodataId,
 	}
 
-	_, err = db.DbCon().Collection("tbl_about_me").InsertOne(context.TODO(), dataInput)
+	_, err = dbCon.Collection("tbl_about_me").InsertOne(context.TODO(), dataInput)
 	if err != nil {
 		responseProfile(w, 0, err.Error(), f, http.StatusBadRequest)
 		return
@@ -259,7 +261,7 @@ func PostContact(w http.ResponseWriter, r *http.Request)  {
 		"biodataid": c.BiodataId,
 	}
 
-	_, err = db.DbCon().Collection("tbl_contact").InsertOne(context.TODO(), dataInput)
+	_, err = dbCon.Collection("tbl_contact").InsertOne(context.TODO(), dataInput)
 	if err != nil {
 		responseProfile(w, 0, err.Error(), f, http.StatusBadRequest)
 		return
@@ -297,7 +299,7 @@ func PostSocial(w http.ResponseWriter, r *http.Request)  {
 		"biodataid":s.BiodataId,
 	}
 
-	_, err = db.DbCon().Collection("tbl_social_media").InsertOne(context.TODO(), dataInput)
+	_, err = dbCon.Collection("tbl_social_media").InsertOne(context.TODO(), dataInput)
 	if err != nil {
 		responseProfile(w, 0, err.Error(), f, http.StatusBadRequest)
 		return
@@ -333,7 +335,7 @@ func PostPicture(w http.ResponseWriter, r *http.Request)  {
 		"biodataid":p.BiodataId,
 	}
 
-	_, err = db.DbCon().Collection("tbl_profile_picture").InsertOne(context.TODO(), dataInput)
+	_, err = dbCon.Collection("tbl_profile_picture").InsertOne(context.TODO(), dataInput)
 	if err != nil {
 		responseProfile(w, 0, err.Error(), f, http.StatusBadRequest)
 		return
