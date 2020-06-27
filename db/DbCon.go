@@ -2,7 +2,6 @@ package db
 
 import (
 	"context"
-	"fmt"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
@@ -10,13 +9,13 @@ import (
 )
 
 func DbCon(dbName string) (*mongo.Database, string){
-	status := "Connected to MongoDB!"
-	//user := helpers.LoadEnv("DB_USER")
-	//pass := helpers.LoadEnv("DB_PASS")
-	//db := helpers.LoadEnv("DB_NAME")
-	//host := helpers.LoadEnv("DB_HOST")
-	//uri := fmt.Sprintf("mongodb+srv://%s:%s@%s/%s?retryWrites=true&w=majority",
-	//	user, pass, host, db)
+	/*user := helpers.LoadEnv("DB_USER")
+	pass := helpers.LoadEnv("DB_PASS")
+	db := helpers.LoadEnv("DB_NAME")
+	host := helpers.LoadEnv("DB_HOST")
+	uri := fmt.Sprintf("mongodb+srv://%s:%s@%s/%s?retryWrites=true&w=majority",
+		user, pass, host, db)*/
+	
 	uri := "mongodb://localhost:27017"
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
@@ -28,7 +27,7 @@ func DbCon(dbName string) (*mongo.Database, string){
 	err = client.Ping(ctx, nil)
 	if err != nil { log.Fatal(err) }
 
-	fmt.Println(status)
+	status := "Connected to MongoDB!"
 
 	return client.Database(dbName), status
 }
