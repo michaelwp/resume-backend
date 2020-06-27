@@ -7,7 +7,7 @@ os: linux
 
 dist: bionic
 
-#services: mongodb
+services: mongodb
 
 before_script:
   - go get -t -v ./...
