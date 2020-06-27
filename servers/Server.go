@@ -3,6 +3,7 @@ package servers
 import (
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+	"github.com/michaelwp/resume-backend/helpers"
 	"github.com/michaelwp/resume-backend/routers"
 	"net/http"
 	"os"
@@ -11,8 +12,8 @@ import (
 )
 
 func Server() (*http.Server, *mux.Router, string, string, string)  {
-	port := ":8080"
-	host := "localhost"
+	port := helpers.LoadEnv("HOST_PORT")
+	host := helpers.LoadEnv("HOST_DEV")
 	resp := strings.Join([]string{"Server", host, "running and listening on port", port}, " ")
 	router := mux.NewRouter()
 	loggedRouter := handlers.LoggingHandler(os.Stdout, router)
