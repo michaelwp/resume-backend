@@ -201,7 +201,7 @@ func PostProfile(w http.ResponseWriter, r *http.Request)  {
 /*
 	=====================================================
 	Home [POST]
-	http://localhost:8080/aboutme
+	http://localhost:8080/api/v1/profiles/abouts
 	request Body = {
 		"about_me": "Software Engineer",
 		"biodata_id": "123456"
@@ -237,7 +237,7 @@ func PostAbout(w http.ResponseWriter, r *http.Request)  {
 /*
 	=====================================================
 	Home [POST]
-	http://localhost:8080/contact
+	http://localhost:8080/api/v1/profiles/contacts
 	request Body = {
 		"phone_number": "+62 123",
         "email": "mail@mail.com",
@@ -275,10 +275,10 @@ func PostContact(w http.ResponseWriter, r *http.Request)  {
 /*
 	=====================================================
 	Home [POST]
-	http://localhost:8080/socialmedia
+	http://localhost:8080/api/v1/profiles/socials
 	request Body = {
 		"name": "linkedin",
-        "llink": "http://www.linkedin.com/in/michael-wenceslaus",
+        "link": "http://www.linkedin.com/in/michael-wenceslaus",
         "biodata_id": "123456"
 	}
 	=====================================================
@@ -313,9 +313,9 @@ func PostSocial(w http.ResponseWriter, r *http.Request)  {
 /*
 	=====================================================
 	Home [POST]
-	http://localhost:8080/profilepicture
+	http://localhost:8080/api/v1/profiles/pictures
 	request Body = {
-		"img_uri": "https://imgur.com/kMplORU",
+		"img_uri": "https://i.imgur.com/pgPfRVW.jpg",
         "biodata_id": "123456"
 	}
 	=====================================================
