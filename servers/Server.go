@@ -1,9 +1,11 @@
 package servers
 
 import (
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/michaelwp/resume-backend/routers"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 )
@@ -13,8 +15,9 @@ func Server() (*http.Server, *mux.Router, string, string, string)  {
 	host := "localhost"
 	resp := strings.Join([]string{"Server", host, "running and listening on port", port}, " ")
 	router := mux.NewRouter()
+	loggedRouter := handlers.LoggingHandler(os.Stdout, router)
 	srv := &http.Server{
-		Handler: router,
+		Handler: loggedRouter,
 		Addr: strings.Join([]string{host, port},""),
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout: 15 * time.Second,
