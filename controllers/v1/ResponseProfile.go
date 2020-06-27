@@ -14,7 +14,7 @@ func responseProfile(w http.ResponseWriter, s int, m string, b []models.BiodataF
 	r.Message = m
 	r.Data = b
 
-	w.Header().Set("Content-type", "application/xml")
+	w.Header().Set("Content-type", "application/json")
 	w.WriteHeader(h)
 
 	err := json.NewEncoder(w).Encode(r)

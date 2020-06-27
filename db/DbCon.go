@@ -17,7 +17,7 @@ func DbCon() *mongo.Database{
 	host := helpers.LoadEnv("DB_HOST")
 	uri := fmt.Sprintf("mongodb+srv://%s:%s@%s/%s?retryWrites=true&w=majority",
 		user, pass, host, db)
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 	clientOptions := options.Client().ApplyURI(uri)
 
