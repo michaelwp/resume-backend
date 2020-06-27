@@ -10,15 +10,13 @@ import (
 	"time"
 )
 
-func Server() (*http.Server, *mux.Router, string, string, string)  {
-	port := ":8080"
-	host := "localhost"
-	resp := strings.Join([]string{"Server", host, "running and listening on port", port}, " ")
+func Server(h string) (*http.Server, *mux.Router, string)  {
+	resp := strings.Join([]string{"Server running on", h}, " ")
 	router := mux.NewRouter()
 	loggedRouter := handlers.LoggingHandler(os.Stdout, router)
 	srv := &http.Server{
 		Handler: loggedRouter,
-		Addr: strings.Join([]string{host, port},""),
+		Addr: h,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout: 15 * time.Second,
 	}
@@ -26,5 +24,5 @@ func Server() (*http.Server, *mux.Router, string, string, string)  {
 	//connecting to router
 	routers.MainRouter(router)
 
-	return srv, router, resp, host, port
+	return srv, router, resp
 }
