@@ -2,14 +2,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/michaelwp/resume-backend/routers"
+	"github.com/michaelwp/resume-backend/servers"
 	"log"
-	"net/http"
 )
 
 func main()  {
-	router, resp, port := routers.RouterCon()
+	srv, _, resp, _, _ := servers.Server()
 
-	fmt.Println(resp, port)
-	log.Fatal(http.ListenAndServe(port, router))
+	fmt.Println(resp)
+	log.Fatal(srv.ListenAndServe())
 }

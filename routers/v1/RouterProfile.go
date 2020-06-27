@@ -5,7 +5,7 @@ import (
 	"github.com/michaelwp/resume-backend/controllers/v1"
 )
 
-func RouterProfile(r *mux.Router) string{
+func RouterProfile(r *mux.Router) {
 	r.HandleFunc("/profiles", v1.GetProfile).Methods("GET")
 	r.HandleFunc("/profiles", v1.PostProfile).Methods("POST")
 
@@ -15,6 +15,4 @@ func RouterProfile(r *mux.Router) string{
 	profiles.HandleFunc("/contacts", v1.PostContact).Methods("POST")
 	profiles.HandleFunc("/socials", v1.PostSocial).Methods("POST")
 	profiles.HandleFunc("/pictures", v1.PostPicture).Methods("POST")
-
-	return "router profile version 1"
 }
