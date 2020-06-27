@@ -16,7 +16,7 @@ import (
 /*
 	=====================================================
 	Profile [GET]
-	http://localhost:8080/profile
+	http://localhost:8080/api/v1/profiles
 	=====================================================
 */
 func GetProfile(w http.ResponseWriter, r *http.Request)  {
@@ -153,7 +153,7 @@ func findProfilePicture(id string) models.ProfilePicture {
 /*
 	=====================================================
 	Home [POST]
-	http://localhost:8080/profile
+	http://localhost:8080/api/v1/profiles
 	request Body = {
 		"first_name" : "John"
 		"last_name" : "Doe"
