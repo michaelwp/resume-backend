@@ -3,17 +3,17 @@ package db
 import (
 	"context"
 	"fmt"
-	"github.com/michaelwp/resume-backend/helpers"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
 	"time"
 )
 
-func DbCon() *mongo.Database{
+func DbCon(dbName string) (*mongo.Database, string){
+	status := "Connected to MongoDB!"
 	//user := helpers.LoadEnv("DB_USER")
 	//pass := helpers.LoadEnv("DB_PASS")
-	db := helpers.LoadEnv("DB_NAME")
+	//db := helpers.LoadEnv("DB_NAME")
 	//host := helpers.LoadEnv("DB_HOST")
 	//uri := fmt.Sprintf("mongodb+srv://%s:%s@%s/%s?retryWrites=true&w=majority",
 	//	user, pass, host, db)
@@ -28,8 +28,8 @@ func DbCon() *mongo.Database{
 	err = client.Ping(ctx, nil)
 	if err != nil { log.Fatal(err) }
 
-	fmt.Println("Connected to MongoDB!")
+	fmt.Println(status)
 
-	return client.Database(db)
+	return client.Database(dbName), status
 }
 
