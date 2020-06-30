@@ -43,6 +43,22 @@ type ProfilePicture struct {
 	BiodataId	string `json:"biodata_id"`
 }
 
+type EducationDegree struct {
+	Id 			primitive.ObjectID `bson:"_id" json:"id"`
+	Degree		string `json:"degree"`
+}
+
+type Education struct {
+	Id 			primitive.ObjectID `bson:"_id" json:"id"`
+	StartDate	string `json:"start_date"`
+	EndDate		string `json:"end_date"`
+	SchoolName	string `json:"school_name"`
+	Gpa			int32  `json:"gpa"`
+	Degree		string `json:"degree"`
+	Major		string `json:"major"`
+	BiodataId	string `json:"biodata_id"`
+}
+
 type BiodataFull struct {
 	Biodata 	Biodata
 	AboutMe		AboutMe
