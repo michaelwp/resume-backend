@@ -15,6 +15,7 @@ func responseProfile(w http.ResponseWriter, s int, m string, b []models.BiodataF
 	r.Data = b
 
 	w.Header().Set("Content-type", "application/json")
+	//w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(h)
 
 	err := json.NewEncoder(w).Encode(r)

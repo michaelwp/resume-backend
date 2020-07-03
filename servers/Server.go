@@ -12,6 +12,7 @@ import (
 func Server(h string) (*http.Server, *mux.Router, string)  {
 	resp := strings.Join([]string{"Server running on", h}, " ")
 	router := mux.NewRouter()
+	router.Use(mux.CORSMethodMiddleware(router))
 	loggedRouter := middlewares.RouterLogger(router)
 	srv := &http.Server{
 		Handler: loggedRouter,
