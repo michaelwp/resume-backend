@@ -2,6 +2,7 @@ package v1
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/michaelwp/resume-backend/models"
 	"log"
 	"net/http"
@@ -20,4 +21,6 @@ func responseProfile(w http.ResponseWriter, s int, m string, b []models.BiodataF
 
 	err := json.NewEncoder(w).Encode(r)
 	if err != nil {log.Fatal(err)}
+
+	fmt.Println("tes")
 }
