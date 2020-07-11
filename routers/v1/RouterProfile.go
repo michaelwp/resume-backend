@@ -7,6 +7,7 @@ import (
 
 func RouterProfile(r *mux.Router) {
 	r.HandleFunc("/profiles", v1.GetProfile).Methods("GET")
+	r.HandleFunc("/profiles/{id}", v1.GetProfileById).Methods("GET")
 	r.HandleFunc("/profiles", v1.PostProfile).Methods("POST")
 
 	profiles := r.PathPrefix("/profiles").Subrouter()

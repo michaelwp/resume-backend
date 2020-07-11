@@ -3,6 +3,7 @@ package v1
 import (
 	"context"
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"github.com/michaelwp/resume-backend/db"
 	"github.com/michaelwp/resume-backend/helpers"
 	"github.com/michaelwp/resume-backend/models"
@@ -54,6 +55,21 @@ func GetProfile(w http.ResponseWriter, r *http.Request)  {
 
 	responseProfile(w, 1, "Profile Data", biodataFullRes, http.StatusOK)
 }
+
+
+/*
+	=====================================================
+	Profile [GET]
+	http://localhost:8080/api/v1/profiles/{id}
+	=====================================================
+*/
+func GetProfileById(w http.ResponseWriter, r *http.Request)  {
+	var f []models.BiodataFull
+	vars := mux.Vars(r)
+	f = append(f, findBiodata(vars["id"]))
+	responseProfile(w, 1, "Profile Data", f, http.StatusCreated)
+}
+
 
 /*
 	=====================================================
